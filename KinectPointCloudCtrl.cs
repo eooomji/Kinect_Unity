@@ -7,7 +7,7 @@ using Microsoft.Azure.Kinect.Sensor;
 // 비동기 처리
 using System.Threading.Tasks;
 
-public class KinectPointCloudCtrlScript : MonoBehaviour
+public class KinectPointCloudCtrl : MonoBehaviour
 {
     // Kinect 변수
     Device kinect;
