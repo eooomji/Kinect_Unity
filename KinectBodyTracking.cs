@@ -24,7 +24,7 @@ public class KinectBodyTracking : MonoBehaviour
 
     [SerializeField]
     GameObject rightHand;   // 오른손
-    
+
     private void Start()
     {
         // Kinect 초기화
@@ -54,8 +54,8 @@ public class KinectBodyTracking : MonoBehaviour
         });
 
         // 컬러 이미지의 가로 폭, 세로 폭 취득
-        int width = kinect.GetCalibration().DepthCameraCalibration.ResolutionWidth;
-        int height = kinect.GetCalibration().DepthCameraCalibration.ResolutionHeight;
+        int width = kinect.GetCalibration().ColorCameraCalibration.ResolutionWidth;
+        int height = kinect.GetCalibration().ColorCameraCalibration.ResolutionHeight;
 
         // 컬러 텍스쳐 생성
         kinectColorTexture = new Texture2D(width, height);
@@ -102,13 +102,12 @@ public class KinectBodyTracking : MonoBehaviour
     }
 
     // 이펙트 프리팹 지정
-    private void SetMarkPos(GameObject effectPrefab, Jointld jointId, Frame frame)
+    private void SetMarkPos(GameObject effectPrefab, JointId jointId, Frame frame)
     {
         // 설정한 뼈대에 이펙트 프리팹 위치 지정
         var joint = frame.GetBodySkeleton(0).GetJoint(jointId);
         var offset = 50;    // 적당한 오프셋 지정
-        var pos = new Vector3(joint.Position.X / -offset, joint.Position.Y / -offset,
-                                joint.Position.Z / offset);
+        var pos = new Vector3(joint.Position.X / -offset, joint.Position.Y / -offset, joint.Position.Z / offset);
         effectPrefab.transform.localPosition = pos;
     }
     private void OnDestroy()
